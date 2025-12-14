@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JOE.B.TECH Bundle Site</title>
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+
+<header>
+  <h2>JOE.B.TECH Bundles</h2>
+  <p>Fast & Reliable MTN Data</p>
+</header>
+
+<div class="container">
+
+<!-- NETWORKS -->
+<div class="card">
+  <h3>Select Network</h3>
+  <button onclick="showMTN()">MTN</button><br><br>
+  <button class="disabled" onclick="comingSoon()">Telecel (Coming Soon)</button><br><br>
+  <button class="disabled" onclick="comingSoon()">AirtelTigo (Coming Soon)</button>
+</div>
+
+<!-- MTN SECTION -->
+<div class="card" id="mtnSection" style="display:none;">
+  <h3>MTN Bundles</h3>
+
+  <p><b>Prices:</b></p>
+  <ul>
+    <li>1GB – ₵5.5</li>
+    <li>2GB – ₵11.2</li>
+    <li>3GB – ₵15.5</li>
+    <li>5GB – ₵25.7</li>
+    <li>10GB – ₵47</li>
+  </ul>
+  <br>
+  <div class="notice">
+      <span>   📌 Please fill in the order details and submit order before you proceed with payment</span>
+  </div>
+  <br>
+  <div class="card order-card">
+      <h3>Order Details</h3>
+      <form id="orderForm" action="process_order.php" method="post" enctype="multipart/form-data">
+          <input type="hidden" name="status" value="NONE">
+          <label>choose bundle</label>
+          <select id="bundle-select" name="bundle">
+              <option value="gb" data-price="-₵">gb ₵</option>
+          </select>
+          <label>Enter your name</label>
+          <input type="text" id="reciepient" placeholder="Enter the name on your Ghana card" required>
+          <button class="order" type="submit">Submit order</button>
+       </form>
+    </div>
+  <div class="notice">
+    ⏱ Delivery time: <b>5 – 45 minutes</b><br>
+    📌 Reference must be: <b>BUNDLE</b>
+  </div>
+
+  <br>
+  <button onclick="openPayment()">Proceed to Payment</button>
+</div>
+
+<!-- PAYMENT MODAL -->
+<div class="card" id="paymentBox" style="display:none;">
+  <h3>MTN MoMo Payment</h3>
+
+  <div class="copy">
+    <b>MoMo Number:</b> <span id="number">0533833889</span>
+    <button onclick="copyText('0533833889')">Copy</button>
+  </div>
+
+  <div class="copy">
+    <b>Name:</b> Nana Oye Darko
+  </div>
+
+  <div class="copy">
+    <b>Reference:</b> BUNDLE
+  </div>
+
+  <div class="notice" id="deviceNotice"></div>
+
+  <br>
+  <button id="dialBtn" onclick="dialUSSD()">Dial *170#</button><br><br>
+
+  <button class="secondary" onclick="openWhatsApp()">I Have Paid (WhatsApp)</button>
+</div>
+
+</div>
+
+<script src="assets/javascript /script.js"></script>
+
+</body>
+</html>
