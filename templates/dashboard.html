@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Admin Dashboard</title>
+
+<style>
+body{
+  font-family:Segoe UI;
+  background:#f4f7fb;
+}
+.cards{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:20px;
+}
+.card{
+  background:white;
+  padding:16px;
+  border-radius:12px;
+  box-shadow:0 8px 20px rgba(0,0,0,.08);
+  border-left:6px solid #0a58ff;
+}
+.status{
+  padding:6px 12px;
+  border-radius:20px;
+  font-size:13px;
+  font-weight:600;
+}
+.pending{background:#fff3cd;color:#856404}
+.delivered{background:#d4edda;color:#155724}
+button{
+  background:#0a58ff;
+  color:white;
+  border:none;
+  padding:6px 10px;
+  border-radius:4px;
+  cursor:pointer;
+}
+.delete{background:#ed6610}
+</style>
+</head>
+
+<body>
+
+<h2>JOE.B.TECH Admin Dashboard</h2>
+
+<div class="cards">
+{% for order in orders %}
+  <div class="card">
+    <b>Customer:</b> {{ order.recipient }}<br>
+    <b>Bundle:</b> {{ order.bundle }}<br><br>
+
+    <span class="status {{ order.status|lower }}">{{ order.status }}</span>
+    <br><br>
+
+    {% if order.status == "Pending" %}
+    <form method="POST" action="{{ url_for('deliver', order_id=order._id) }}">
+      <button>Mark Delivered</button>
+    </form>
+    {% endif %}
+
+    <form method="POST" action="{{ url_for('delete_card', order_id=order._id) }}">
+      <button class="delete">Delete</button>
+    </form>
+  </div>
+{% endfor %}
+</div>
+
+</body>
+</html>
